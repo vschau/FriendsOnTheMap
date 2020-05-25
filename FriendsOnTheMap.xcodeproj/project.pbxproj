@@ -9,21 +9,51 @@
 /* Begin PBXBuildFile section */
 		2674C859247B03E2002423BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C858247B03E2002423BA /* AppDelegate.swift */; };
 		2674C85B247B03E2002423BA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C85A247B03E2002423BA /* SceneDelegate.swift */; };
-		2674C85D247B03E2002423BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C85C247B03E2002423BA /* ViewController.swift */; };
+		2674C85D247B03E2002423BA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C85C247B03E2002423BA /* LoginViewController.swift */; };
 		2674C860247B03E2002423BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2674C85E247B03E2002423BA /* Main.storyboard */; };
 		2674C862247B03E7002423BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2674C861247B03E7002423BA /* Assets.xcassets */; };
 		2674C865247B03E7002423BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2674C863247B03E7002423BA /* LaunchScreen.storyboard */; };
+		2674C870247B0D8E002423BA /* MapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C86F247B0D8E002423BA /* MapClient.swift */; };
+		2674C874247B19D4002423BA /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C873247B19D4002423BA /* LoginRequest.swift */; };
+		2674C877247B1C57002423BA /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C876247B1C57002423BA /* ErrorResponse.swift */; };
+		2674C879247B1D9E002423BA /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C878247B1D9E002423BA /* LoginResponse.swift */; };
+		2674C87B247B31D8002423BA /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C87A247B31D8002423BA /* UIViewController+Extension.swift */; };
+		2674C87D247B33D5002423BA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C87C247B33D5002423BA /* MapViewController.swift */; };
+		2674C87F247B3402002423BA /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C87E247B3402002423BA /* LocationViewController.swift */; };
+		2674C881247B4155002423BA /* StudentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C880247B4155002423BA /* StudentResponse.swift */; };
+		2674C883247B4195002423BA /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C882247B4195002423BA /* StudentLocation.swift */; };
+		2674C886247B4459002423BA /* StudentLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C885247B4459002423BA /* StudentLocationModel.swift */; };
+		2674C888247B6603002423BA /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C887247B6603002423BA /* AddLocationViewController.swift */; };
+		2674C88A247B763F002423BA /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C889247B763F002423BA /* UserResponse.swift */; };
+		2674C88C247B82DD002423BA /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C88B247B82DD002423BA /* LocationRequest.swift */; };
+		2674C88E247B8309002423BA /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C88D247B8309002423BA /* CurrentLocation.swift */; };
+		2674C890247B8729002423BA /* ViewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2674C88F247B8729002423BA /* ViewLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2674C855247B03E2002423BA /* FriendsOnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendsOnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2674C858247B03E2002423BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2674C85A247B03E2002423BA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2674C85C247B03E2002423BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2674C85C247B03E2002423BA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2674C85F247B03E2002423BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2674C861247B03E7002423BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2674C864247B03E7002423BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2674C866247B03E7002423BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2674C86F247B0D8E002423BA /* MapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapClient.swift; sourceTree = "<group>"; };
+		2674C873247B19D4002423BA /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		2674C876247B1C57002423BA /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		2674C878247B1D9E002423BA /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		2674C87A247B31D8002423BA /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		2674C87C247B33D5002423BA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2674C87E247B3402002423BA /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		2674C880247B4155002423BA /* StudentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentResponse.swift; sourceTree = "<group>"; };
+		2674C882247B4195002423BA /* StudentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		2674C885247B4459002423BA /* StudentLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationModel.swift; sourceTree = "<group>"; };
+		2674C887247B6603002423BA /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		2674C889247B763F002423BA /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		2674C88B247B82DD002423BA /* LocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
+		2674C88D247B8309002423BA /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
+		2674C88F247B8729002423BA /* ViewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +72,7 @@
 			children = (
 				2674C857247B03E2002423BA /* FriendsOnTheMap */,
 				2674C856247B03E2002423BA /* Products */,
+				2674C858247B03E2002423BA /* AppDelegate.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +87,85 @@
 		2674C857247B03E2002423BA /* FriendsOnTheMap */ = {
 			isa = PBXGroup;
 			children = (
-				2674C858247B03E2002423BA /* AppDelegate.swift */,
+				2674C86E247B04F8002423BA /* Model */,
+				2674C86C247B044E002423BA /* Controller */,
+				2674C86D247B046A002423BA /* Assets */,
 				2674C85A247B03E2002423BA /* SceneDelegate.swift */,
-				2674C85C247B03E2002423BA /* ViewController.swift */,
-				2674C85E247B03E2002423BA /* Main.storyboard */,
-				2674C861247B03E7002423BA /* Assets.xcassets */,
-				2674C863247B03E7002423BA /* LaunchScreen.storyboard */,
 				2674C866247B03E7002423BA /* Info.plist */,
 			);
 			path = FriendsOnTheMap;
+			sourceTree = "<group>";
+		};
+		2674C86C247B044E002423BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2674C85C247B03E2002423BA /* LoginViewController.swift */,
+				2674C87C247B33D5002423BA /* MapViewController.swift */,
+				2674C87E247B3402002423BA /* LocationViewController.swift */,
+				2674C887247B6603002423BA /* AddLocationViewController.swift */,
+				2674C88F247B8729002423BA /* ViewLocationViewController.swift */,
+				2674C87A247B31D8002423BA /* UIViewController+Extension.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2674C86D247B046A002423BA /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2674C85E247B03E2002423BA /* Main.storyboard */,
+				2674C861247B03E7002423BA /* Assets.xcassets */,
+				2674C863247B03E7002423BA /* LaunchScreen.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2674C86E247B04F8002423BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2674C884247B444D002423BA /* Data */,
+				2674C871247B1541002423BA /* Client */,
+				2674C872247B19B6002423BA /* Requests */,
+				2674C875247B1C18002423BA /* Responses */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2674C871247B1541002423BA /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				2674C86F247B0D8E002423BA /* MapClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		2674C872247B19B6002423BA /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				2674C873247B19D4002423BA /* LoginRequest.swift */,
+				2674C88B247B82DD002423BA /* LocationRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		2674C875247B1C18002423BA /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				2674C876247B1C57002423BA /* ErrorResponse.swift */,
+				2674C878247B1D9E002423BA /* LoginResponse.swift */,
+				2674C880247B4155002423BA /* StudentResponse.swift */,
+				2674C882247B4195002423BA /* StudentLocation.swift */,
+				2674C889247B763F002423BA /* UserResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		2674C884247B444D002423BA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2674C885247B4459002423BA /* StudentLocationModel.swift */,
+				2674C88D247B8309002423BA /* CurrentLocation.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +239,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2674C85D247B03E2002423BA /* ViewController.swift in Sources */,
+				2674C883247B4195002423BA /* StudentLocation.swift in Sources */,
+				2674C87B247B31D8002423BA /* UIViewController+Extension.swift in Sources */,
+				2674C88C247B82DD002423BA /* LocationRequest.swift in Sources */,
+				2674C85D247B03E2002423BA /* LoginViewController.swift in Sources */,
+				2674C890247B8729002423BA /* ViewLocationViewController.swift in Sources */,
+				2674C888247B6603002423BA /* AddLocationViewController.swift in Sources */,
 				2674C859247B03E2002423BA /* AppDelegate.swift in Sources */,
+				2674C88A247B763F002423BA /* UserResponse.swift in Sources */,
+				2674C881247B4155002423BA /* StudentResponse.swift in Sources */,
 				2674C85B247B03E2002423BA /* SceneDelegate.swift in Sources */,
+				2674C886247B4459002423BA /* StudentLocationModel.swift in Sources */,
+				2674C87D247B33D5002423BA /* MapViewController.swift in Sources */,
+				2674C87F247B3402002423BA /* LocationViewController.swift in Sources */,
+				2674C877247B1C57002423BA /* ErrorResponse.swift in Sources */,
+				2674C874247B19D4002423BA /* LoginRequest.swift in Sources */,
+				2674C870247B0D8E002423BA /* MapClient.swift in Sources */,
+				2674C879247B1D9E002423BA /* LoginResponse.swift in Sources */,
+				2674C88E247B8309002423BA /* CurrentLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
