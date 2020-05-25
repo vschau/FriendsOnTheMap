@@ -19,18 +19,20 @@ class MapClient {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         case session
-        case studentList
-        case student
+        case studentLocation(Int)
+        case user
+        case createStudentLocation
         
         var stringValue: String {
             switch self {
                 case .session:
                     return Endpoints.base + "/session"
-                case .studentList:
-//                    return Endpoints.base + "StudentLocation?limit=100"
-                    return Endpoints.base + "/StudentLocation?limit=10"
-                case .student:
+                case .studentLocation(let limit):
+                    return Endpoints.base + "/StudentLocation?limit=\(limit)&&order=-updatedAt"
+                case .user:
                     return Endpoints.base + "/users/\(Auth.userId)"
+                case .createStudentLocation:
+                    return Endpoints.base + "/StudentLocation"
             }
         }
         
@@ -49,13 +51,15 @@ class MapClient {
             }
             let decoder = JSONDecoder()
             do {
-                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                print(" - GET URL: \(url.absoluteString)")
+                print(String(data: cleanResponse(data), encoding: .utf8)!)
+                let responseObject = try decoder.decode(ResponseType.self, from: cleanResponse(data))
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }
             } catch {
                 do {
-                    let errorResponse = try decoder.decode(ErrorResponse.self, from: data) as! Error
+                    let errorResponse = try decoder.decode(ErrorResponse.self, from: cleanResponse(data)) as Error
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
@@ -70,48 +74,37 @@ class MapClient {
         return task
     }
     
-    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
-        print(url)
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, deleteExtra: Bool, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(body)
+        print(" - BODY", body)
 
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
             let decoder = JSONDecoder()
-            
-            // Check if the response has an error
-            if error != nil {
-                print("Error \(String(describing: error))")
+
+            do {
+                print(" - POST URL: \(url.absoluteString)")
+                print(String(data: cleanResponse(data), encoding: .utf8)!)
+                let responseObject = try decoder.decode(ResponseType.self, from: cleanResponse(data))
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
                 do {
-                    let errorResponse = try decoder.decode(ErrorResponse.self, from: data!) as! Error
+                    let errorResponse = try decoder.decode(ErrorResponse.self, from: cleanResponse(data)) as Error
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
                     }
                 } catch {
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
-                }
-            }
-
-            if let httpResponse = response as? HTTPURLResponse{
-                if httpResponse.statusCode == 200 {
-                    let decoder = JSONDecoder()
-                    do {
-                        let newData = data!.subdata(in: 5..<data!.count)
-                        print(String(data: newData, encoding: .utf8)!)
-                        let responseObject = try decoder.decode(ResponseType.self, from: newData)
-                        DispatchQueue.main.async {
-                            completion(responseObject, nil)
-                        }
-                    } catch {
-                        DispatchQueue.main.async {
-                            completion(nil, error)
-                        }
-                    }
-                } else {
                     DispatchQueue.main.async {
                         completion(nil, error)
                     }
@@ -124,9 +117,8 @@ class MapClient {
     class func login(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let body = LoginRequest(udacity: LoginInfo(username: username, password: password))
 
-        taskForPOSTRequest(url: Endpoints.session.url, responseType: LoginResponse.self, body: body) { response, error in
+        taskForPOSTRequest(url: Endpoints.session.url, responseType: LoginResponse.self, deleteExtra: true, body: body) { response, error in
             if let response = response {
-                print(response)
                 Auth.sessionId = response.session.id
                 Auth.expiration = response.session.expiration
                 Auth.userId = response.account.key
@@ -154,9 +146,8 @@ class MapClient {
         task.resume()
     }
     
-    class func getStudentLocationList(completion: @escaping ([StudentLocation], Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.studentList.url, responseType: StudentLocationResponse.self) { response, error in
-            print(response!.results)
+    class func getStudentLocationList(completion: @escaping ([StudentInformation], Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.studentLocation(100).url, responseType: StudentLocationResponse.self) { response, error in
             if let response = response {
                 completion(response.results, nil)
             } else {
@@ -165,14 +156,28 @@ class MapClient {
         }
     }
     
-//    class func getStudent(completion: @escaping (User, Error?) -> Void) {
-//        taskForGETRequest(url: Endpoints.studentList.url, responseType: StudentLocationResponse.self) { response, error in
-//            print(response!.results)
-//            if let response = response {
-//                completion(response.results, nil)
-//            } else {
-//                completion([], error)
-//            }
-//        }
-//    }
+    class func getUser(completion: @escaping (UserResponse?, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.user.url, responseType: UserResponse.self) { response, error in
+            if let response = response {
+                completion(response, nil)
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+    
+    class func createStudentLocation(locationRequest body: LocationRequest, completion: @escaping (Bool, Error?) -> Void) {
+        taskForPOSTRequest(url: Endpoints.createStudentLocation.url, responseType: LocationResponse.self, deleteExtra:false, body: body) { response, error in
+            if response != nil {
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
+    
+    class func cleanResponse(_ data: Data) -> Data {
+        let str = String(data: data, encoding: .utf8)!
+        return str.hasPrefix("{") ? data : data.subdata(in: 5..<data.count)
+    }
 }

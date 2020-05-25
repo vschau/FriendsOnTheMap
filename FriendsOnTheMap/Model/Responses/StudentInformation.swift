@@ -1,5 +1,5 @@
 //
-//  StudentLocation.swift
+//  StudentInformation.swift
 //  FriendsOnTheMap
 //
 //  Created by Vanessa on 5/24/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentLocation: Codable {
+struct StudentInformation: Codable {
     let firstName: String
     let lastName: String
     let longitude: Double
@@ -21,12 +21,3 @@ struct StudentLocation: Codable {
     let updatedAt: String
 }
 
-extension StudentLocation {
-    var url: String {
-        if (!mediaURL.hasPrefix("http") && !mediaURL.hasPrefix("https")) {
-            return "https://\(mediaURL)"
-        } else {
-            return ""
-        }
-    }
-}

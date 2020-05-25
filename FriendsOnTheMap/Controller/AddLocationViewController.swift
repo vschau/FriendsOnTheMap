@@ -11,62 +11,54 @@ import CoreLocation
 import UIKit
 
 class AddLocationViewController: UIViewController {
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var coordinate: CLLocationCoordinate2D!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        locationTextField.text = ""
+        linkTextField.text = ""
+    }
+    
+    // MARK: - IBAction
     @IBAction func findTapped(_ sender: Any) {
-        getCoordinate(addressString: "Dallas, TX", completionHandler: handleGeocodeResult)
+        activityIndicator.startAnimating()
+        getCoordinate(addressString: locationTextField.text!)
     }
     
-    @IBAction func cancelTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-
-    func getCoordinate( addressString : String, completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
+    func getCoordinate(addressString : String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(addressString) { (placemarks, error) in
             if error == nil {
                 if let placemark = placemarks?[0] {
-                    let location = placemark.location!
-                        
-                    completionHandler(location.coordinate, nil)
-                    return
+                    self.coordinate = placemark.location!.coordinate
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.performSegue(withIdentifier: "viewLocation", sender: nil)
+                    }
                 }
+            } else {
+                self.geocodeFailure(message: error?.localizedDescription ?? "")
             }
-            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
     }
     
-    
-    func handleGeocodeResult(success: CLLocationCoordinate2D, error: NSError?) {
-        if error == nil {
-//            performSegue(withIdentifier: "geocodeSegue", sender: nil)
-//            CurrentLocation.latitude = success.latitude
-//            CurrentLocation.longitude = success.longitude
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "viewLocation") as! ViewLocationViewController
-            viewController.latitude = success.latitude
-            viewController.longitude = success.longitude
-            if let navigator = navigationController {
-                DispatchQueue.main.async {
-                    navigator.pushViewController(viewController, animated: true)
-                }
-            }
-        } else {
-            geocodeFailure(message: error?.localizedDescription ?? "")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? ViewLocationViewController {
+            viewController.mapString = locationTextField.text
+            viewController.mediaURL = linkTextField.text
+            viewController.coordinate = coordinate
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let vc = segue.destination as? NotesListViewController {
-//            if let indexPath = tableView.indexPathForSelectedRow {
-//                vc.notebook = notebook(at: indexPath)
-//                // this line!!!
-//                vc.dataController = dataController
-//            }
-//        }
-//    }
     
     func geocodeFailure(message: String) {
-        let alertVC = UIAlertController(title: "Geocoding Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        let controller = UIAlertController(title: "Unable to Find Location", message: "Please try again", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default)
+        controller.addAction(okAction)
+        present(controller, animated: true, completion: nil)
+        self.activityIndicator.stopAnimating()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CurrentLocation.swift
+//  StudentLocationResponse.swift
 //  FriendsOnTheMap
 //
 //  Created by Vanessa on 5/24/20.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct CurrentLocation {
-    static var latitude = Double()
-    static var longitude = Double()
+struct StudentLocationResponse: Codable {
+    let results: [StudentInformation]
 }

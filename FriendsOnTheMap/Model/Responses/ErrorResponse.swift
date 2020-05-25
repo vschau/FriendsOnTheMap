@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ErrorResponse: Codable {
+struct ErrorResponse: Codable, Error {
     let status: Int
     let error: String
 }

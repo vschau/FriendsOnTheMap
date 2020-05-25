@@ -13,7 +13,6 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         refreshstudentLocationList()
     }
     
@@ -24,6 +23,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StudentLocationModel.studentLocationList.count
     }
@@ -46,11 +46,12 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         UIApplication.shared.open(URL(string: student.mediaURL)!, options: [:])
     }
     
+    // MARK: - IBAction
     @IBAction func refreshTapped(_ sender: UIBarButtonItem) {
         refreshstudentLocationList()
     }
     
-    @IBAction func logoutTapped(_ sender: UIButton) {
+    @IBAction func logoutTapped(_ sender: Any) {
         MapClient.logout {
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)

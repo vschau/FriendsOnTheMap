@@ -16,15 +16,19 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSignupLink()
+        setSignupAttributedLink()
+    }
+    
+    func setSignupAttributedLink() {
+        signup.delegate = self
+        let attributedString = NSMutableAttributedString(string: "Don't have an account? Sign Up")
+        attributedString.addAttribute(.link, value: "https://auth.udacity.com/sign-up?redirect_to=onthemap:authenticate", range: NSRange(location: 23, length: 7))
+        signup.attributedText = attributedString
     }
 
     @IBAction func loginTapped(_ sender: Any) {
-        performSegue(withIdentifier: "completeLogin", sender: nil)
-//        MapClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse)
-//        MapClient.login(username: "gnessa14@gmail.com", password: "aishiteru", completion: handleLoginResponse)
+        MapClient.login(username: emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: handleLoginResponse)
     }
-    
     
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
@@ -36,18 +40,9 @@ class LoginViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Helpers
     func showLoginFailure(message: String) {
-        let alertVC = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        show(alertVC, sender: nil)
+        let controller = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+        controller.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        show(controller, sender: nil)
     }
-    
-    func setupSignupLink() {
-        signup.delegate = self
-        let attributedString = NSMutableAttributedString(string: "Don't have an account? Sign Up")
-        attributedString.addAttribute(.link, value: "https://auth.udacity.com/sign-up?redirect_to=onthemap:authenticate", range: NSRange(location: 23, length: 7))
-        signup.attributedText = attributedString
-    }
-    
-    
 }
 

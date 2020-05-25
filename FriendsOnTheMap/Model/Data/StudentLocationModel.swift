@@ -7,5 +7,5 @@
 //
 
 class StudentLocationModel {
-    static var studentLocationList = [StudentLocation]()
+    static var studentLocationList = [StudentInformation]()
 }

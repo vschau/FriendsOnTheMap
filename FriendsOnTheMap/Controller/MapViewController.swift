@@ -16,10 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-
-        if (StudentLocationModel.studentLocationList.isEmpty) {
-            getStudentList()
-        }
+        getStudentList()
     }
     
     func getStudentList() {
@@ -74,6 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
 
+    // MARK: - IBAction
     @IBAction func refreshTapped(_ sender: UIBarButtonItem) {
         getStudentList()
     }
